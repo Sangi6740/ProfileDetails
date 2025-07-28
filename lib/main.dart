@@ -82,7 +82,11 @@ class MyHomePage extends StatelessWidget {
                 ],
               ),
             ),
-            ListTile(leading: Icon(Icons.home), title: Text("My home")),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text("My home"),
+              selected: true,
+            ),
 
             ListTile(
               leading: Icon(Icons.person),
@@ -130,21 +134,6 @@ class Detailspage extends StatelessWidget {
                 SizedBox(height: 16),
                 Text("Hello Sandra Thomas!", style: TextStyle(fontSize: 25)),
                 SizedBox(height: 20),
-                Text("Click to return home"),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.greenAccent,
-                    foregroundColor: Colors.black,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MyHomePage()),
-                    );
-                  },
-                  child: Text("HOME"),
-                ),
               ],
             ),
           ),
@@ -166,9 +155,23 @@ class Detailspage extends StatelessWidget {
                 ],
               ),
             ),
-            ListTile(leading: Icon(Icons.home), title: Text("My Home")),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text("My Home"),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyHomePage()),
+                );
+              },
+            ),
 
-            ListTile(leading: Icon(Icons.person), title: Text("My details")),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text("My details"),
+              selected: true,
+            ),
           ],
         ),
       ),
