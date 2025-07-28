@@ -44,7 +44,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 16),
-                Text("Hello Sandra Thomas!", style: TextStyle(fontSize: 25)),
+                Text("Hello Sandra!", style: TextStyle(fontSize: 25)),
                 SizedBox(height: 20),
                 Text("Click the button below to check your details."),
                 SizedBox(height: 20),
@@ -54,7 +54,10 @@ class MyHomePage extends StatelessWidget {
                     foregroundColor: Colors.black,
                   ),
                   onPressed: () {
-                    print("Button has been clicked");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Detailspage()),
+                    );
                   },
                   child: Text("Details"),
                 ),
@@ -79,6 +82,92 @@ class MyHomePage extends StatelessWidget {
                 ],
               ),
             ),
+            ListTile(leading: Icon(Icons.home), title: Text("My home")),
+
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text("My details"),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Detailspage()),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Detailspage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Profile"),
+        backgroundColor: Colors.greenAccent,
+        foregroundColor: Colors.black,
+        centerTitle: true,
+      ),
+      body: Center(
+        child: Card(
+          elevation: 4,
+          child: SizedBox(
+            width: 350,
+            height: 670,
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: CircleAvatar(
+                    radius: 100,
+                    backgroundImage: AssetImage('assets/profile.webp'),
+                  ),
+                ),
+                SizedBox(height: 16),
+                Text("Hello Sandra Thomas!", style: TextStyle(fontSize: 25)),
+                SizedBox(height: 20),
+                Text("Click to return home"),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.greenAccent,
+                    foregroundColor: Colors.black,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyHomePage()),
+                    );
+                  },
+                  child: Text("HOME"),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Colors.tealAccent),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundImage: AssetImage('assets/profile.webp'),
+                  ),
+                  SizedBox(width: 20),
+                  Text(" Welcome Sandra! "),
+                ],
+              ),
+            ),
+            ListTile(leading: Icon(Icons.home), title: Text("My Home")),
+
             ListTile(leading: Icon(Icons.person), title: Text("My details")),
           ],
         ),
