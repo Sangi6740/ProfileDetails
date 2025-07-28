@@ -124,6 +124,7 @@ class _DetailspageState extends State<Detailspage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('User Details'),
+        backgroundColor: Colors.deepPurpleAccent,
         actions: [
           IconButton(
             icon: Icon(isEditing ? Icons.check : Icons.edit),
@@ -142,7 +143,7 @@ class _DetailspageState extends State<Detailspage> {
                 children: [
                   TextField(
                     controller: nameController,
-                    decoration: const InputDecoration(labelText: 'Name'),
+                    decoration: const InputDecoration(labelText: 'Name: '),
                   ),
                   TextField(
                     controller: emailController,
@@ -154,7 +155,7 @@ class _DetailspageState extends State<Detailspage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Name: ${nameController.text}',
+                    'Name : ${nameController.text}',
                     style: const TextStyle(fontSize: 20),
                   ),
                   const SizedBox(height: 10),
