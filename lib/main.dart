@@ -106,74 +106,64 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-class Detailspage extends StatelessWidget {
+class Detailspage extends StatefulWidget {
+  @override
+  State<Detailspage> createState() => _DetailspageState();
+}
+
+class _DetailspageState extends State<Detailspage> {
+  bool isEditing = false;
+
+  final nameController = TextEditingController(text: "Sandra Thomas");
+  final emailController = TextEditingController(
+    text: "sandrathomas@example.com",
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Profile"),
-        backgroundColor: Colors.greenAccent,
-        foregroundColor: Colors.black,
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Card(
-          elevation: 4,
-          child: SizedBox(
-            width: 350,
-            height: 670,
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 20),
-                  child: CircleAvatar(
-                    radius: 100,
-                    backgroundImage: AssetImage('assets/profile.webp'),
-                  ),
-                ),
-                SizedBox(height: 16),
-                Text("Hello Sandra Thomas!", style: TextStyle(fontSize: 25)),
-                SizedBox(height: 20),
-              ],
-            ),
+        title: const Text('User Details'),
+        actions: [
+          IconButton(
+            icon: Icon(isEditing ? Icons.check : Icons.edit),
+            onPressed: () {
+              setState(() {
+                isEditing = !isEditing; // Toggle between view/edit
+              });
+            },
           ),
-        ),
+        ],
       ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(color: Colors.tealAccent),
-              child: Row(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: isEditing
+            ? Column(
                 children: [
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundImage: AssetImage('assets/profile.webp'),
+                  TextField(
+                    controller: nameController,
+                    decoration: const InputDecoration(labelText: 'Name'),
                   ),
-                  SizedBox(width: 20),
-                  Text(" Welcome Sandra! "),
+                  TextField(
+                    controller: emailController,
+                    decoration: const InputDecoration(labelText: 'Email'),
+                  ),
+                ],
+              )
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Name: ${nameController.text}',
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Email: ${emailController.text}',
+                    style: const TextStyle(fontSize: 20),
+                  ),
                 ],
               ),
-            ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text("My Home"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MyHomePage()),
-                );
-              },
-            ),
-
-            ListTile(
-              leading: Icon(Icons.person),
-              title: Text("My details"),
-              selected: true,
-            ),
-          ],
-        ),
       ),
     );
   }
